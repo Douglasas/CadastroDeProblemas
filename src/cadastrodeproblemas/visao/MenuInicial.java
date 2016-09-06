@@ -1,6 +1,8 @@
 package cadastrodeproblemas.visao;
 
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  * @author Douglas
@@ -19,7 +21,7 @@ public class MenuInicial {
             System.out.print("\nOpção:\n>> ");
             OUTER:
             do {
-                opc = in.next();
+                opc = in.nextLine();
                 opc = opc.toUpperCase();
                 switch (opc) {
                     case "V":
@@ -30,8 +32,11 @@ public class MenuInicial {
                         break OUTER;
                     case "0":
                         break OUTER;
+                    case "":
+                        System.out.print(">> ");
+                        break;
                     default:
-                        System.out.print("Opcao invalida, digite novamente:\n >> ");
+                        System.out.print("Opcao invalida, digite novamente:\n>> ");
                         break;
                 }
             } while (true);

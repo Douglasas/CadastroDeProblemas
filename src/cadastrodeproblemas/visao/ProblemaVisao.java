@@ -24,13 +24,20 @@ class ProblemaVisao {
         
         System.out.println("=== REPORTE DE NOVO PROBLEMA ===");
         System.out.print("Digite a descricao do problema:\n>> ");
-        descricao = in.nextLine();
+        do {
+            descricao = in.nextLine();
+            if (descricao.equals(""))
+                System.out.print(">> ");
+        } while (descricao.equals(""));
         
         System.out.print("\nDigite a data que o problema foi reportado:\n>> ");
         do {
             try {
                 data = formatadorData.parse(in.nextLine());
-                break;
+                if (data.after(new Date())){
+                    System.out.print("Data nao pode ser futura, digite novamente:\n>> ");
+                } else 
+                    break;
             } catch (Exception ex) {
                 System.out.print("Data invalida, digite novamente:\n>> ");
             }
@@ -43,8 +50,8 @@ class ProblemaVisao {
         ArrayList<Problema> lista = ProblemaControle.obterListaProblemas();
         SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
         Scanner in = new Scanner(System.in);
-        if (lista.size() == 0) {
-            System.out.println("Nenhum problema reportado.\nPressione ENTER para continuar.");
+        if (lista.isEmpty()) {
+            System.out.println("Nenhum problema reportado.\nPressione ENTER para retornar.");
             in.nextLine();
         } else {
             System.out.println("==== LISTAGEM DE PROBLEMAS REPORTADOS ====");
