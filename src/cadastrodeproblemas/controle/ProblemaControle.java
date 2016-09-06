@@ -14,7 +14,7 @@ public class ProblemaControle {
         Problema prob = new Problema();
         prob.setDescricao(descricao);
         prob.setData(data);
-        prob.setSituacao("Aberto");
+        prob.setSituacao(false);
         prob.salvar();
     }
     
@@ -24,7 +24,7 @@ public class ProblemaControle {
 
     public static void resolverProblema(int index) throws IndexOutOfBoundsException {
         Problema prob = Problema.obterLista().get(index);
-        prob.setSituacao("Resolvido");
+        prob.setSituacao(true);
     }
     
     

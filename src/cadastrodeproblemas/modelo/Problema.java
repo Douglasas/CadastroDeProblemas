@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Problema {
     private String descricao;
-    private String situacao;
+    private boolean situacao;
     private Date data;
 
     public void salvar() {
@@ -52,14 +52,14 @@ public class Problema {
     /**
      * @return the situacao
      */
-    public String getSituacao() {
+    public boolean getSituacao() {
         return situacao;
     }
 
     /**
      * @param situacao the situacao to set
      */
-    public void setSituacao(String situacao) {
+    public void setSituacao(boolean situacao) {
         this.situacao = situacao;
     }
 }

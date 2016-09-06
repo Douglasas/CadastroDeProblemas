@@ -55,16 +55,16 @@ class ProblemaVisao {
             in.nextLine();
         } else {
             System.out.println("==== LISTAGEM DE PROBLEMAS REPORTADOS ====");
-            System.out.println("CODIGO\tDESCRICAO\tSITUACAO\tDATA");
+            System.out.println("CODIGO\tSITUACAO\tDATA\t\tDESCRICAO");
             int i = 1;
             for (Problema prob : lista) {
                 System.out.println(  (i++)
                                     + "\t"
-                                    + prob.getDescricao()
-                                    + "\t"
-                                    + prob.getSituacao()
+                                    + ( (prob.getSituacao()) ? "Resolvido" : "Aberto   " )
                                     + "\t"
                                     + formatadorData.format(prob.getData())
+                                    + "\t"
+                                    + prob.getDescricao()
                                 );
             }
 
@@ -77,10 +77,13 @@ class ProblemaVisao {
                     opc = in.nextLine();
                     int escolha = Integer.parseInt(opc);
                     ProblemaControle.resolverProblema(escolha-1);
-                    System.out.println("Problema resolvido!");
+                    System.out.println("Problema resolvido!\nPressione ENTER para retornar.");
+                    in.nextLine();
                     break;
+                    
                 } catch (IndexOutOfBoundsException e) {
                     System.out.print("Problema nao encontrado, digite novamente:\n>> ");
+                    
                 } catch (NumberFormatException e){
                     if (opc.toUpperCase().equals("M")){
                         break;
