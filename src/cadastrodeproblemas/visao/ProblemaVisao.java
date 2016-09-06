@@ -40,45 +40,52 @@ class ProblemaVisao {
     }
     
     public static void exibirListaProblemas() {
-        System.out.println("==== LISTAGEM DE PROBLEMAS REPORTADOS ====");
-        System.out.println("CODIGO\tDESCRICAO\tSITUACAO\tDATA");
         ArrayList<Problema> lista = ProblemaControle.obterListaProblemas();
         SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
-        int i = 1;
-        for (Problema prob : lista) {
-            System.out.println(  (i++)
-                                + "\t"
-                                + prob.getDescricao()
-                                + "\t"
-                                + prob.getSituacao()
-                                + "\t"
-                                + formatadorData.format(prob.getData())
-                            );
-        }
-        
         Scanner in = new Scanner(System.in);
-        
-        System.out.println("\nDigite M para retornar ao menu.");
-        System.out.println("Digite o codigo do problema para mudar a situacao para resolvido.");
-        System.out.print("\nOpcao:\n>> ");
-        do {
-            String opc = "";
-            try {
-                opc = in.nextLine();
-                int escolha = Integer.parseInt(opc);
-                ProblemaControle.resolverProblema(escolha-1);
-                System.out.println("Problema resolvido!");
-                break;
-            } catch (IndexOutOfBoundsException e) {
-                System.out.print("Problema nao encontrado, digite novamente:\n>> ");
-            } catch (NumberFormatException e){
-                if (opc.toUpperCase().equals("M")){
-                    break;
-                } else {
-                    System.out.print("Opcao invalida, digite novamente:\n>> ");
-                }
+        if (lista.size() == 0) {
+            System.out.println("Nenhum problema reportado.\nPressione ENTER para continuar.");
+            in.nextLine();
+        } else {
+            System.out.println("==== LISTAGEM DE PROBLEMAS REPORTADOS ====");
+            System.out.println("CODIGO\tDESCRICAO\tSITUACAO\tDATA");
+            int i = 1;
+            for (Problema prob : lista) {
+                System.out.println(  (i++)
+                                    + "\t"
+                                    + prob.getDescricao()
+                                    + "\t"
+                                    + prob.getSituacao()
+                                    + "\t"
+                                    + formatadorData.format(prob.getData())
+                                );
             }
-        } while (true);
+
+            System.out.println("\nDigite M para retornar ao menu.");
+            System.out.println("Digite o codigo do problema para mudar a situacao para resolvido.");
+            System.out.print("\nOpcao:\n>> ");
+            do {
+                String opc = "";
+                try {
+                    opc = in.nextLine();
+                    int escolha = Integer.parseInt(opc);
+                    ProblemaControle.resolverProblema(escolha-1);
+                    System.out.println("Problema resolvido!");
+                    break;
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.print("Problema nao encontrado, digite novamente:\n>> ");
+                } catch (NumberFormatException e){
+                    if (opc.toUpperCase().equals("M")){
+                        break;
+                    } else {
+                        if (opc.equals(""))
+                            System.out.print(">> ");
+                        else
+                            System.out.print("Opcao invalida, digite novamente:\n>> ");
+                    }
+                }
+            } while (true);
+        }
     }
     
 }
